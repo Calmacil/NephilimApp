@@ -1,0 +1,10 @@
+hello:
+    pattern: /hello/{name}
+    controller: Controllers/Home
+    action: hello
+    params:
+        name: .*
+home:
+    pattern: /
+    controller: Controllers/Home
+    action: index
