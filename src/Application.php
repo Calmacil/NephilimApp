@@ -27,6 +27,7 @@ class Application extends \Silex\Application
     }
 
     use \Silex\Application\UrlGeneratorTrait;
+    use \Silex\Application\TwigTrait;
 
     /**
      * Loads the settings file
@@ -36,6 +37,9 @@ class Application extends \Silex\Application
         $file = ROOT . '/config/settings'.$this->environment.'.yml';
 
         $yml = yaml_parse_file($file);
+
+        array_walk($yml, 'self::compileSettings');
+
         foreach($yml as $key => $val) {
             $this->offsetSet($key, $val);
         }
@@ -74,5 +78,16 @@ class Application extends \Silex\Application
     private function getClassName(string $namespace): string
     {
         return "\\Nephilim\\" . str_replace('/', '\\', $namespace);
+    }
+
+    /**
+     * Callback for settings loading
+     */
+    private function compileSettings(&$item, $key)
+    {
+        if (is_array($item))
+            array_walk($item, 'self::compileSettings');
+        else
+            $item = str_replace('ROOT', ROOT, $item);
     }
 }

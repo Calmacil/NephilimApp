@@ -6,7 +6,7 @@ class Home
 {
     public function indexAction(App $app): string
     {
-        return "Hello World!<br/><a href='" . $app->url('hello', ['name'=>'Gérard']) . "'>Cliquez ici!<a/>";
+        return $app->render('home/index.twig');
     }
 
     public function helloAction(App $app, string $name): string
