@@ -1,19 +1,29 @@
 <!DOCTYPE html>
-<html langs="fr">
+<html lang="fr">
     <head>
         <meta charset="utf-8">
 
         <link rel="stylesheet" type="text/css" href="/vendor/css/grid.css">
-        <link rel="stylesheet" type="text/css" href="/vendor/css/form.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/css/forms.css">
+
         <link rel="stylesheet" type="text/css" href="/css/style.css">
         {% block headAssets %}{% endblock %}
     </head>
 
     <body>
-        {% block body %}{% endblock %}
+
+        <div class="container full-page">
+            <div class="span-6 colborder">
+                {% include '/nav.twig' %}
+            </div>
+
+            <div class="span-18">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
     </body>
 
-    <script type="text/javascript" src="/vendor/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/vendor/js/jquery-3.1.1.min.js"></script>
     {% block bottomAssets %}{% endblock %}
 
 </html>

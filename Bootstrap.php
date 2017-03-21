@@ -10,5 +10,4 @@ $app = new App(App::ENV_DEV);
 $app->register(new TwigServiceProvider, $app['twig']);
 
 //$app->get('/', function() { return "Hello World!"; })->bind('home');
-
 $app->run();
