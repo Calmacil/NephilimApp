@@ -77,13 +77,17 @@ abstract class AbstractEntity implements ArrayAccess
         $this->offsetSet($name, $value);
     }
 
-    private function populateOrGetProperty($name): mixed
+    private function populateOrGetProperty($name, $params = array()): mixed
     {
         if (property_exists($this, ($relation_name = "__" . ucfirst($name)))) {
             if (!$this->{$relation_name}) {
                 if (!array_key_exists(ucfirst($name), $this->relations))
                     throw new EntityError("Tried to access a non-existing relation", 4);
-                $this->{$relation_name} = $this->{relations[ucfirst($name)]}();
+
+                if (!is_callable($this->relations[ucfirst($name)]))
+                    throw new EntityError("Impossible to resolve the relation", 5);
+
+                $this->{$relation_name} = call_user_func_array($this->relations[ucfirst($name)], $params);
             }
             return $this->{$relation_name};
         }
