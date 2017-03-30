@@ -1,2 +1,16 @@
 <?php
-namespace \Nephilim\Controllers;
+namespace Nephilim\Controllers;
+
+use \Silex\Application as App;
+use \Nephilim\Entities\CalendarEventEntity;
+
+class Calendar
+{
+    public function indexAction(App $app): string
+    {
+        $dt = new \DateTime('2017-03-02');
+        $ce = $app['service.calendar']->findByDate($dt);
+
+        return $app->renderView('calendar/index.twig', ['event'=>$ce]);
+    }
+}

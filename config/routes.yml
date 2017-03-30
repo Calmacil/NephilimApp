@@ -1,9 +1,7 @@
-hello:
-    pattern: /hello/{name}
-    controller: Controllers/Home
-    action: hello
-    params:
-        name: .*
+calendar:
+    pattern: /calendar
+    controller: Controllers/Calendar
+    action: index
 home:
     pattern: /
     controller: Controllers/Home

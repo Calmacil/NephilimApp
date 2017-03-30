@@ -22,7 +22,7 @@ class Application extends \Silex\Application
         parent::__construct();
         $this->environment = $environnement;
         $this->loadConfig();
-        // TODO load services
+        $this->loadServices();
         $this->loadRoutes();
     }
 
@@ -72,6 +72,17 @@ class Application extends \Silex\Application
             }
             $ctrl->method($method);
             $ctrl->bind($bind_name);
+        }
+    }
+
+    private function loadServices(): void
+    {
+        $file = ROOT . '/config/services.yml';
+        $yml = yaml_parse_file($file);
+
+        foreach ($yml as $service_name => $service) {
+            $class = $this->getClassName($service);
+            $this->offsetSet($service_name, function($app) use ($class) {return new $class($app);});
         }
     }
 

@@ -1,7 +1,15 @@
 debug: true
-twig:
+conf.twig:
     twig.path: 'ROOT/templates/'
     twig.options:
         debug: false
         cache: 'ROOT/tmp/cache/'
         auto_reload: true
+conf.doctrine:
+    db.options:
+        driver: pdo_mysql
+        dbname: nephilim
+        host: localhost
+        user: nephilim
+        password: nephilim
+        charset: utf8mb4
