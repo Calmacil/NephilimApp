@@ -1,6 +1,8 @@
-<nav>
-    <ul>
-        <li>Menu item</li>
-        <li>Other item</li>
-    </ul>
-</nav>
+<ul class="sidebar-nav">
+    <li class="sidebar-brand {% if (active_page == 'home') %}active{% endif %}">
+        <a href="{{ url('home') }}">Accueil</a>
+    </li>
+    <li class="sidebar-brand {% if (active_page == 'calendar') %}active{% endif %}">
+        <a href="{{ url('calendar') }}">Calendrier</a>
+    </li>
+</ul>

@@ -6,21 +6,15 @@
 body {
     background-color: @c-default;
 
-    .container.full-page {
-        height: 100%;
+    #wrapper {
 
         // Left menu !
-        .colborder.span-6 {
-            width: 180px;
-            nav {
-                height: 100%;
-
-                ul {
-                    margin: 0;
-                    padding: 15px;
-                    li { list-style-type: none; color: @c-lighter;}
-                    li:hover { color: @c-dark; background-color: @c-light;}
-                }
+        #sidebar-wrapper {
+            background-color: @c-dark;
+            ul.sidebar-nav {
+                li.sidebar-brand { list-style-type: none; color: @c-lighter;}
+                li.sidebar-brand:hover,
+                li.sidebar-brand.active { color: @c-dark; background-color: @c-darker;}
             }
         }
 

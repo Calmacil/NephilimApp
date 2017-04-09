@@ -3,8 +3,11 @@
     <head>
         <meta charset="utf-8">
 
-        <link rel="stylesheet" type="text/css" href="/vendor/css/grid.css">
-        <link rel="stylesheet" type="text/css" href="/vendor/css/forms.css">
+{#        <link rel="stylesheet" type="text/css" href="/vendor/css/grid.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/css/forms.css">#}
+        <link rel="stylesheet" type="text/css" href="/vendor/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/css/theme.min.css">
+        <link rel="stylesheet" type="text/css" href="/vendor/css/simple-sidebar.css">
 
         <link rel="stylesheet" type="text/css" href="/css/style.css">
         {% block headAssets %}{% endblock %}
@@ -12,17 +15,28 @@
 
     <body>
 
-        <div class="container full-page">
-            <div class="span-6 colborder">
+        <div id="wrapper" class="toggled">
+            
+            <!-- #sidebar -->
+            <div id="sidebar-wrapper">
                 {% include '/nav.twig' %}
             </div>
+            <!-- /#sidebar -->
 
-            <div class="span-18">
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
                 {% block body %}{% endblock %}
+                </div>
             </div>
+            <!-- /#page-content-wrapper -->
         </div>
+        <!-- #wrapper -->
         
         <script type="text/javascript" src="/vendor/js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" scr="/vendor/js/bootstrap.min.js"></script>
+        
+        
+        
         {% block bottomAssets %}{% endblock %}
     </body>
 

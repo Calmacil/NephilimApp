@@ -5,3 +5,74 @@
 @c-default: #515e73;
 @c-dark:    #36445c;
 @c-darker:  #1c2e4e;
+
+// 11 astres
+@zod-sun:       "\2609 ";
+@zod-mercury:   "\263f ";
+@zod-venus:     "\2640 ";
+@zod-earth:     "\2641 ";
+@zod-moon:      "\263e ";
+@zod-mars:      "\2642 ";
+@zod-jupiter:   "\2643 ";
+@zod-saturn:    "\2644 ";
+@zod-uranus:    "\2645 ";
+@zod-neptune:   "\2646 ";
+@zod-pluto:     "\2647 ";
+
+// 12 constellations
+@zod-aries:     "\2648 ";
+@zod-taurus:    "\2649 ";
+@zod-gemini:    "\264a ";
+@zod-cancer:    "\264b ";
+@zod-leo:       "\264c ";
+@zod-virgo:     "\264d ";
+@zod-libra:     "\264e ";
+@zod-scorpio:   "\264f ";
+@zod-sagittarius: "\2650 ";
+@zod-capri:     "\2651 ";
+@zod-aqua:      "\2652 ";
+@zod-pisces:    "\2653 ";
+@zod-ophiuchus: "\2695 ";
+
+// 12 couleurs
+@c-sun:     #ee6;
+@c-water:   #16e;
+@c-moon:    #ccc;
+@c-earth:   #892;
+@c-fire:    #f00;
+@c-air:     #6be;
+@c-darkmoon: #000;
+@c-ori:     #444;
+@c-khaiba:  #727;
+@c-adamante: #5a6;
+@c-darksun: #415;
+@c-truemoon: #fff;
+
+@k-shadow: 0 0 1px #ffa;
+
+li.k-feu::before {content: @zod-mars; color: @c-fire; text-shadow: @k-shadow}
+li.k-air::before {content: @zod-jupiter; color: @c-air; text-shadow: @k-shadow}
+li.k-eau::before {content: @zod-mercury; color: @c-water; text-shadow: @k-shadow}
+li.k-lun::before {content: @zod-moon; color: @c-moon; text-shadow: @k-shadow}
+li.k-ter::before {content: @zod-venus; color: @c-earth; text-shadow: @k-shadow}
+li.k-sol::before {content: @zod-sun; color: @c-sun; text-shadow: @k-shadow}
+li.k-ori::before {content: @zod-saturn; color: @c-ori; text-shadow: @k-shadow}
+li.k-ln::before {content: @zod-moon; color: @c-darkmoon; text-shadow: @k-shadow}
+li.k-iba::before {content: @zod-uranus; color: @c-khaiba; text-shadow: @k-shadow}
+li.k-ada::before {content: @zod-neptune; color: @c-adamante; text-shadow: @k-shadow}
+li.k-sn::before {content: @zod-pluto; color: @c-darksun; text-shadow: @k-shadow}
+li.k-oln::before {content: @zod-earth; color: @c-truemoon; text-shadow: @k-shadow}
+
+li.z-ari::before {content: @zod-aries; color: @c-fire; text-shadow: @k-shadow}
+li.z-tau::before {content: @zod-taurus; color: @c-earth; text-shadow: @k-shadow}
+li.z-gem::before {content: @zod-gemini; color: @c-water; text-shadow: @k-shadow}
+li.z-can::before {content: @zod-cancer; color: @c-moon; text-shadow: @k-shadow}
+li.z-leo::before {content: @zod-leo; color: @c-sun; text-shadow: @k-shadow}
+li.z-vir::before {content: @zod-virgo; color: @c-water; text-shadow: @k-shadow}
+li.z-lib::before {content: @zod-libra; color: @c-earth; text-shadow: @k-shadow}
+li.z-sco::before {content: @zod-scorpio; color: @c-fire; text-shadow: @k-shadow}
+li.z-sag::before {content: @zod-sagittarius; color: @c-air; text-shadow: @k-shadow}
+li.z-cap::before {content: @zod-capri; color: @c-moon; text-shadow: @k-shadow}
+li.z-aqu::before {content: @zod-aqua; color: @c-ori; text-shadow: @k-shadow}
+li.z-pis::before {content: @zod-pisces; color: @c-air; text-shadow: @k-shadow}
+li.z-oph::before {content: @zod-ophiuchus; color: @c-darkmoon; text-shadow: @k-shadow}

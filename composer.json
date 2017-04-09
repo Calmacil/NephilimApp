@@ -3,7 +3,8 @@
         "silex/silex": "~2.0",
         "twig/twig": "^1.28",
         "monolog/monolog": "^1.22",
-        "doctrine/dbal": "~2.2"
+        "doctrine/dbal": "~2.2",
+        "symfony/twig-bridge": "^3.2"
     },
     "autoload": {
         "psr-4": {

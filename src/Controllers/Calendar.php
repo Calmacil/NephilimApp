@@ -2,7 +2,6 @@
 namespace Nephilim\Controllers;
 
 use \Silex\Application as App;
-use \Nephilim\Entities\CalendarEventEntity;
 
 class Calendar
 {
