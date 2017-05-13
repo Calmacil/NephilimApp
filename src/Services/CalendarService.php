@@ -7,6 +7,21 @@ namespace Nephilim\Services;
 class CalendarService extends AbstractService
 {
     private $table = "calendar_event";
+    
+    const MONTH_NAMES = [
+        1 => "Janvier",
+        2 => "Février",
+        3 => "Mars",
+        4 => "Avril",
+        5 => "Mai",
+        6 => "Juin",
+        7 => "Juillet",
+        8 => "Août",
+        9 => "Septembre",
+        10 => "Octobre",
+        11 => "Novembre",
+        12 => "Décembre"
+    ];
 
     /**
      * Gets an event by it's date
@@ -48,7 +63,9 @@ __SQL__;
         ];
         
         $events = $this->app['db']->fetchAssoc($sql, $params);
-        if (!$events) $events = [];
+        if (!$events) {
+            $events = [];
+        }
         
         return $this->createCalendarArray($month, $year, $events);
     }
@@ -64,7 +81,7 @@ __SQL__;
     private function createCalendarArray(int $month, int $year, array $events = null)
     {
         $weeks = [];
-        $firstDayOfWeekForMonth = date('N', "$year-$month-01");
+        $firstDayOfWeekForMonth = date('N', strtotime(sprintf("%d-%02d-01", $year, $month)));
         
         for ($i = 0; $i < $this->weeksInMonth($month, $year); $i++) {
             $weeks[] = [];
@@ -84,7 +101,7 @@ __SQL__;
                 $weeks[$i][] = $day;
             }
         }
-        
+        var_dump($weeks);
         return $weeks;
     }
     
@@ -131,8 +148,9 @@ __SQL__;
         $startDay = date('N', strtotime("$year-$month-01"));
         $endDay = date('N', strtotime("$year-$month-$daysInMonth"));
         
-        if ($endDay < $startDay)
+        if ($endDay < $startDay) {
             $numOfWeeks++;
+        }
         
         return $numOfWeeks;
     }
