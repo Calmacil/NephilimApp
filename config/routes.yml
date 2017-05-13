@@ -2,6 +2,13 @@ calendar:
     pattern: /calendar
     controller: Controllers/Calendar
     action: index
+calendarMonthYear:
+    pattern: /calendar/{month}/{year}
+    controller: Controllers/Calendar
+    action: fromMonthYear
+    params:
+        month: \d+
+        year: \d+
 home:
     pattern: /
     controller: Controllers/Home

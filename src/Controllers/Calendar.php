@@ -5,11 +5,23 @@ use \Silex\Application as App;
 
 class Calendar
 {
+    /**
+     * Renders the calendar with default year and month
+     * @param App $app
+     * @return string
+     */
     public function indexAction(App $app): string
     {
-        $dt = new \DateTime('2017-03-02');
-        $ce = $app['service.calendar']->findByDate($dt);
+        $year = date('Y');
+        $month = date('m');
 
-        return $app->renderView('calendar/index.twig', ['event'=>$ce]);
+        return $this->fromMonthYear($app, $year, $month);
+    }
+    
+    public function fromMonthYear(App $app, int $year, int $month): string
+    {
+        $weeks = $app['service.calendar']->findByMonthYear($month, $year);
+        
+        return $app->renderView('calendar/calendar.twig', ['weeks' => $weeks]);
     }
 }

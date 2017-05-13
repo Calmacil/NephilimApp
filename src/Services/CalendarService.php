@@ -48,6 +48,7 @@ __SQL__;
         ];
         
         $events = $this->app['db']->fetchAssoc($sql, $params);
+        if (!$events) $events = [];
         
         return $this->createCalendarArray($month, $year, $events);
     }
@@ -63,18 +64,24 @@ __SQL__;
     private function createCalendarArray(int $month, int $year, array $events = null)
     {
         $weeks = [];
-        $firstDayOfWeekForMonth = date('N', "$year-$month-1");
+        $firstDayOfWeekForMonth = date('N', "$year-$month-01");
         
         for ($i = 0; $i < $this->weeksInMonth($month, $year); $i++) {
             $weeks[] = [];
             
-            for ($j = 0; $j < 7; $j++) {
-                //$weeks[$i][] = [];
-                $dayNb = ($i*7 + $j + 1) - $firstDayOfWeekForMonth;
-                $inMonth = ($i == 0 && $j >= $firstDayOfWeekForMonth);
-                $event = $this->extractEventFromArray($dayNb, $month, $year, $events);
+            for ($j = 1; $j <= 7; $j++) {
+                $dayNb = ($i*7 + $j + 1);
+                $notInMonth = ($i == 0 && $j >= $firstDayOfWeekForMonth || $dayNb > $this->daysInMonth($month, $year));
+                $event = null;
                 
-                $day = ['in_month' => $inMonth, 'event' => $event, 'day' => $dayNb];
+                if (!$notInMonth) {
+                    $event = $this->extractEventFromArray($dayNb, $month, $year, $events);
+                }
+                
+                $day = $notInMonth ?
+                        ['in_month' => false] :
+                        ['in_month' => true, 'event' => $event, 'day' => $dayNb];
+                $weeks[$i][] = $day;
             }
         }
         
@@ -88,7 +95,7 @@ __SQL__;
      * @param int $year
      * @param array $events
      */
-    private function extractEventFromArray(int $day, int $month, int $year, array $events): mixed
+    private function extractEventFromArray(int $day, int $month, int $year, array $events)
     {
         $refDate = new \DateTime(sprintf("%s-%02s-%02s", $year, $month, $day));
         
