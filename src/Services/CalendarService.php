@@ -87,7 +87,7 @@ __SQL__;
             $weeks[] = [];
             
             for ($j = 1; $j <= 7; $j++) {
-                $dayNb = ($i*7 + $j + 1);
+                $dayNb = ($i*7 + $j);
                 $notInMonth = ($i == 0 && $j >= $firstDayOfWeekForMonth || $dayNb > $this->daysInMonth($month, $year));
                 $event = null;
                 
