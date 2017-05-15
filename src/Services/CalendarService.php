@@ -7,6 +7,21 @@ namespace Nephilim\Services;
 class CalendarService extends AbstractService
 {
     private $table = "calendar_event";
+    
+    const MONTH_NAMES = [
+        1 => "Janvier",
+        2 => "Février",
+        3 => "Mars",
+        4 => "Avril",
+        5 => "Mai",
+        6 => "Juin",
+        7 => "Juillet",
+        8 => "Août",
+        9 => "Septembre",
+        10 => "Octobre",
+        11 => "Novembre",
+        12 => "Décembre"
+    ];
 
     /**
      * Gets an event by it's date
@@ -43,12 +58,14 @@ WHERE `date` BETWEEN :date_before AND :date_after
 __SQL__;
 
         $params = [
-            'date_before' => '',
-            'date_after' => '',
+            'date_before' => sprintf("%s-%02s-01", $year, $month),
+            'date_after' => sprintf("%s-%02s-%02s", $year, $month, $this->daysInMonth($month, $year)),
         ];
         
-        $events = $this->app['db']->fetchAssoc($sql, $params);
-        if (!$events) $events = [];
+        $events = $this->app['db']->fetchAll($sql, $params);
+        if (!$events) {
+            $events = [];
+        }
         
         return $this->createCalendarArray($month, $year, $events);
     }
@@ -64,14 +81,14 @@ __SQL__;
     private function createCalendarArray(int $month, int $year, array $events = null)
     {
         $weeks = [];
-        $firstDayOfWeekForMonth = date('N', "$year-$month-01");
+        $firstDayOfWeekForMonth = date('N', strtotime(sprintf("%d-%02d-01", $year, $month)));
         
         for ($i = 0; $i < $this->weeksInMonth($month, $year); $i++) {
             $weeks[] = [];
             
             for ($j = 1; $j <= 7; $j++) {
-                $dayNb = ($i*7 + $j + 1);
-                $notInMonth = ($i == 0 && $j >= $firstDayOfWeekForMonth || $dayNb > $this->daysInMonth($month, $year));
+                $dayNb = ($i*7 + $j) - $firstDayOfWeekForMonth + 1;
+                $notInMonth = ($i == 0 && $j < $firstDayOfWeekForMonth || $dayNb > $this->daysInMonth($month, $year));
                 $event = null;
                 
                 if (!$notInMonth) {
@@ -84,7 +101,6 @@ __SQL__;
                 $weeks[$i][] = $day;
             }
         }
-        
         return $weeks;
     }
     
@@ -100,7 +116,7 @@ __SQL__;
         $refDate = new \DateTime(sprintf("%s-%02s-%02s", $year, $month, $day));
         
         foreach ($events as $event) {
-            $cmpDate = new \DateTime($event['date']);
+            $cmpDate = \DateTime::createFromFormat('Y-m-d', $event['date']);
             if ($refDate == $cmpDate->format('Y-m-d')) {
                 return $event;
             }
@@ -131,8 +147,9 @@ __SQL__;
         $startDay = date('N', strtotime("$year-$month-01"));
         $endDay = date('N', strtotime("$year-$month-$daysInMonth"));
         
-        if ($endDay < $startDay)
+        if ($endDay < $startDay) {
             $numOfWeeks++;
+        }
         
         return $numOfWeeks;
     }

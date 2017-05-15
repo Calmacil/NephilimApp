@@ -15,13 +15,16 @@ class Calendar
         $year = date('Y');
         $month = date('m');
 
-        return $this->fromMonthYear($app, $year, $month);
+        return $this->fromMonthYearAction($app, $year, $month);
     }
     
-    public function fromMonthYear(App $app, int $year, int $month): string
+    public function fromMonthYearAction(App $app, int $year, int $month): string
     {
         $weeks = $app['service.calendar']->findByMonthYear($month, $year);
         
-        return $app->renderView('calendar/calendar.twig', ['weeks' => $weeks]);
+        return $app->renderView('calendar/calendar.twig', ['weeks' => $weeks,
+            'year' => $year,
+            'month' => $month,
+            'nameMonth' => $app['service.calendar']::MONTH_NAMES[$month]]);
     }
 }

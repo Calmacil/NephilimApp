@@ -1,0 +1,13 @@
+{% extends "layout.twig" %}
+
+{% block body %}
+    <h2>{{ nameMonth }} {{ year }}</h2>
+    
+    <div id="calendar">
+        <div id="calendar-content" class="container-fluid">
+            {% for week in weeks %}
+                {% include "calendar/_week.twig" with {'week' : week } %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
