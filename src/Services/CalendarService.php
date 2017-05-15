@@ -58,11 +58,11 @@ WHERE `date` BETWEEN :date_before AND :date_after
 __SQL__;
 
         $params = [
-            'date_before' => '',
-            'date_after' => '',
+            'date_before' => sprintf("%s-%02s-01", $year, $month),
+            'date_after' => sprintf("%s-%02s-%02s", $year, $month, $this->daysInMonth($month, $year)),
         ];
         
-        $events = $this->app['db']->fetchAssoc($sql, $params);
+        $events = $this->app['db']->fetchAll($sql, $params);
         if (!$events) {
             $events = [];
         }
@@ -87,8 +87,8 @@ __SQL__;
             $weeks[] = [];
             
             for ($j = 1; $j <= 7; $j++) {
-                $dayNb = ($i*7 + $j);
-                $notInMonth = ($i == 0 && $j >= $firstDayOfWeekForMonth || $dayNb > $this->daysInMonth($month, $year));
+                $dayNb = ($i*7 + $j) - $firstDayOfWeekForMonth + 1;
+                $notInMonth = ($i == 0 && $j < $firstDayOfWeekForMonth || $dayNb > $this->daysInMonth($month, $year));
                 $event = null;
                 
                 if (!$notInMonth) {
@@ -101,7 +101,6 @@ __SQL__;
                 $weeks[$i][] = $day;
             }
         }
-        var_dump($weeks);
         return $weeks;
     }
     
@@ -117,7 +116,7 @@ __SQL__;
         $refDate = new \DateTime(sprintf("%s-%02s-%02s", $year, $month, $day));
         
         foreach ($events as $event) {
-            $cmpDate = new \DateTime($event['date']);
+            $cmpDate = \DateTime::createFromFormat('Y-m-d', $event['date']);
             if ($refDate == $cmpDate->format('Y-m-d')) {
                 return $event;
             }
