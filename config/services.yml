@@ -1,1 +1,3 @@
 service.calendar: Services/CalendarService
+service.ephemeris: Services/EphemerisService
+service.ka: Services/KaService

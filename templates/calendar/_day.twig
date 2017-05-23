@@ -1,3 +1,9 @@
-<div class="day {{ day.in_month ? 'active' }} col-lg-1 col-md-1 col-sm-12">
-    {{ day.in_month ? day['day'] : 'OUPS' }}
+<div class="day {{ day.in_month ? 'active' }} col-lg-1 col-md-1 col-sm-12"
+    {% if day.in_month %}
+        title="{{ day.ephemeris.zodiac_name }} - {{ day.ephemeris.ka_name }}"
+    {% endif %}
+>
+    <span class="k-{{ day.in_month ? day.ephemeris.ka_class : 'none'}}">
+        {{ day.in_month ? day['day'] : '' }}
+    </span>
 </div>
