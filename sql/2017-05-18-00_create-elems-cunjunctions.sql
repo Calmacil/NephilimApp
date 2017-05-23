@@ -8,27 +8,26 @@
  * Created: 18 mai 2017
  */
 
-ALTER TABLE `event` ADD PRIMARY KEY `date`;
-
 CREATE TABLE `ka` (
     `id` VARCHAR(3) PRIMARY KEY,
-    `name` VARCHAR(16),
+    `css_class` VARCHAR(8),
+    `name` VARCHAR(16)
 );
 
-INSERT INTO `ka` (`id`, `name`) VALUES
-    ('TER', 'Terre'),
-    ('FEU', 'Feu'),
-    ('AIR', 'Air'),
-    ('EAU', 'Eau'),
-    ('LUN', 'Lune'),
-    ('SOL', 'Soleil'),
-    ('KLN', 'Lune Noire'),
-    ('KSN', 'Soleil Noir'),
-    ('ORI', 'Orichalque'),
-    ('ADA', 'Adamante'),
-    ('KHB', 'Khaiba'),
-    ('BRU', 'Brume'),
-    ('KLO', 'Lune originelle');
+INSERT INTO `ka` (`id`, `css_class`, `name`) VALUES
+    ('TER', 'ter', 'Terre'),
+    ('FEU', 'feu', 'Feu'),
+    ('AIR', 'air', 'Air'),
+    ('EAU', 'eau', 'Eau'),
+    ('LUN', 'lun', 'Lune'),
+    ('SOL', 'sol', 'Soleil'),
+    ('KLN', 'ln', 'Lune Noire'),
+    ('KSN', 'sn', 'Soleil Noir'),
+    ('ORI', 'ori', 'Orichalque'),
+    ('ADA', 'ada', 'Adamante'),
+    ('KHB', 'iba', 'Khaiba'),
+    ('BRU', 'mis', 'Brume'),
+    ('KLO', 'oln', 'Lune originelle');
 
 CREATE TABLE `ephemeris` (
     `id` TINYINT PRIMARY KEY AUTO_INCREMENT,
@@ -37,8 +36,8 @@ CREATE TABLE `ephemeris` (
     `start_day` TINYINT,
     `start_month` TINYINT,
     `end_day` TINYINT,
-    `end_month` TINYINT,
-)
+    `end_month` TINYINT
+);
 
 INSERT INTO `ephemeris` (`zodiac_name`, `ka_id`, `start_day`, `start_month`, `end_day`, `end_month`) VALUES
     ('Bélier', 'FEU', 21, 3, 20, 4),

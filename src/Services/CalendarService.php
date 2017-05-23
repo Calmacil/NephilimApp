@@ -97,7 +97,12 @@ __SQL__;
                 
                 $day = $notInMonth ?
                         ['in_month' => false] :
-                        ['in_month' => true, 'event' => $event, 'day' => $dayNb];
+                        [
+                            'in_month' => true,
+                            'event' => $event,
+                            'day' => $dayNb,
+                            'ephemeris' => $this->app['service.ephemeris']->getForMonthDay($month, $dayNb),
+                        ];
                 $weeks[$i][] = $day;
             }
         }
