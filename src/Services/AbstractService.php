@@ -4,10 +4,10 @@ use Silex\Application as App;
 
 abstract class AbstractService
 {
-    protected $app;
+  protected $app;
 
-    public function __construct(App $app)
-    {
-        $this->app = $app;
-    }
+  public function __construct(App $app)
+  {
+    $this->app = $app;
+  }
 }

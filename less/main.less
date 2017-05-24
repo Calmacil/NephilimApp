@@ -4,22 +4,22 @@
 //@import "widths";
 
 body {
-    background-color: @c-default;
+  background-color: @c-default;
 
-    #wrapper {
+  #wrapper {
 
-        // Left menu !
-        #sidebar-wrapper {
-            background-color: @c-dark;
-            ul.sidebar-nav {
-                li.sidebar-brand { list-style-type: none; color: @c-lighter;}
-                li.sidebar-brand:hover,
-                li.sidebar-brand.active { color: @c-dark; background-color: @c-darker;}
-            }
-        }
-
-        .span-18 {
-            background: lighten(@c-lighter, 20%);
-        }
+    // Left menu !
+    #sidebar-wrapper {
+      background-color: @c-dark;
+      ul.sidebar-nav {
+        li.sidebar-brand { list-style-type: none; color: @c-lighter;}
+        li.sidebar-brand:hover,
+          li.sidebar-brand.active { color: @c-dark; background-color: @c-darker;}
+      }
     }
+
+    .span-18 {
+      background: lighten(@c-lighter, 20%);
+    }
+  }
 }
