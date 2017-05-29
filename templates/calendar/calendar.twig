@@ -1,5 +1,10 @@
 {% extends "layout.twig" %}
 
+{% block headAssets %}
+  <link rel="stylesheet" type="text/css" href="/vendor/css/simplemde.min.css"/>
+{% endblock %}
+
+
 {% block body %}
   <h2>{{ monthName }} {{ year }}</h2>
   <div id="links">
@@ -15,4 +20,8 @@
       {% endfor %}
     </div>
   </div>
+{% endblock %}
+
+{% block bottomAssets %}
+  <script type="text/javascript" src="/vendor/js/simplemde.min.js"></script>
 {% endblock %}
