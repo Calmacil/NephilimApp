@@ -20,9 +20,22 @@ class Calendar {
   public function fromMonthYearAction(App $app, int $year, int $month): string {
     $weeks = $app['service.calendar']->findByMonthYear($month, $year);
 
+    $prevMonth = $month - 1;
+    if ($prevMonth == 0)
+      $prevMonth = 12;
+    
+    $nextMonth = $month + 1;
+    if ($nextMonth == 13)
+      $nextMonth = 1;
+    
     return $app->renderView('calendar/calendar.twig', ['weeks' => $weeks,
-                'year' => $year,
-                'month' => $month,
-                'nameMonth' => $app['service.calendar']::MONTH_NAMES[$month]]);
+        'year' => $year,
+        'month' => $month,
+        'prevMonth' => $prevMonth,
+        'nextMonth' => $nextMonth,
+        'monthName' => $app['service.calendar']::MONTH_NAMES[$month],
+        'prevMonthName' => $app['service.calendar']::MONTH_NAMES[$prevMonth],
+        'nextMonthName' => $app['service.calendar']::MONTH_NAMES[$nextMonth]
+      ]);
   }
 }

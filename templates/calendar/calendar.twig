@@ -1,7 +1,12 @@
 {% extends "layout.twig" %}
 
 {% block body %}
-  <h2>{{ nameMonth }} {{ year }}</h2>
+  <h2>{{ monthName }} {{ year }}</h2>
+  <div id="links">
+    <a href="{{ url('calendarMonthYear', {'month':prevMonth, 'year': (month == 1 ? year - 1 : year)}) }}">&lharu; {{ prevMonthName }}</a>
+    <span> | </span>
+    <a href="{{ url('calendarMonthYear', {'month':nextMonth, 'year': (month == 12 ? year + 1 : year)}) }}">{{ nextMonthName }} &rhard;</a>
+  </div>
 
   <div id="calendar">
     <div id="calendar-content" class="container-fluid">
