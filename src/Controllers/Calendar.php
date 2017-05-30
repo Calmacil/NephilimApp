@@ -19,6 +19,7 @@ class Calendar {
 
   public function fromMonthYearAction(App $app, int $year, int $month): string {
     $weeks = $app['service.calendar']->findByMonthYear($month, $year);
+    $form = $app['service.calendar']->getForm();
 
     $prevMonth = $month - 1;
     if ($prevMonth == 0)
@@ -35,7 +36,8 @@ class Calendar {
         'nextMonth' => $nextMonth,
         'monthName' => $app['service.calendar']::MONTH_NAMES[$month],
         'prevMonthName' => $app['service.calendar']::MONTH_NAMES[$prevMonth],
-        'nextMonthName' => $app['service.calendar']::MONTH_NAMES[$nextMonth]
+        'nextMonthName' => $app['service.calendar']::MONTH_NAMES[$nextMonth],
+        'form' => $form->createView()
       ]);
   }
 }

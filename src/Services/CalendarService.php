@@ -1,6 +1,10 @@
 <?php
 namespace Nephilim\Services;
 
+use \Symfony\Component\Form\Extension\Core\Type\DateType;
+use \Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use \Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 /**
  * @author Calmacil <togo.harrian@gmail.com>
  */
@@ -150,6 +154,15 @@ __SQL__;
     }
 
     return $numOfWeeks;
+  }
+  
+  public function getForm()
+  {
+    return $this->app->form()
+      ->add('date', DateType::class)
+      ->add('content', TextareaType::class)
+      ->add('submit', SubmitType::class, ['label' => '✔'])
+      ->getForm();
   }
 
 }

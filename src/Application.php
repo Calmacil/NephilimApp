@@ -28,6 +28,7 @@ class Application extends \Silex\Application {
 
   use \Silex\Application\UrlGeneratorTrait;
   use \Silex\Application\TwigTrait;
+  use \Silex\Application\FormTrait;
 
   /**
    * Loads the settings file

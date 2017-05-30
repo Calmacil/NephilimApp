@@ -13,3 +13,7 @@ conf.doctrine:
         user: nephilim
         password: nephilim
         charset: utf8mb4
+conf.translation:
+  locale: fr
+  locale_fallbacks: [fr]
+  translator.domains: []

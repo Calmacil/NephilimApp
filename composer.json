@@ -4,7 +4,10 @@
         "twig/twig": "^1.28",
         "monolog/monolog": "^1.22",
         "doctrine/dbal": "~2.2",
-        "symfony/twig-bridge": "^3.2"
+        "symfony/twig-bridge": "^3.2",
+        "symfony/form": "^2.8",
+        "symfony/translation": "^3.2",
+        "symfony/config": "^3.2"
     },
     "autoload": {
         "psr-4": {

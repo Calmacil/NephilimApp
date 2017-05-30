@@ -20,8 +20,15 @@
       {% endfor %}
     </div>
   </div>
+  
+  <div id="calendar-form" class="row">
+    <form method="post" action="" class="col-lg-12">
+      {{ form_widget(form) }}
+    </form>
+  </div>
 {% endblock %}
 
 {% block bottomAssets %}
   <script type="text/javascript" src="/vendor/js/simplemde.min.js"></script>
+  <script type="text/javascript" src="/js/calendar.js"></script>
 {% endblock %}
