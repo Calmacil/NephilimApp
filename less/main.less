@@ -11,6 +11,7 @@ body {
     // Left menu !
     #sidebar-wrapper {
       background-color: @c-dark;
+      z-index: 8;
       ul.sidebar-nav {
         li.sidebar-brand { list-style-type: none; color: @c-lighter;}
         li.sidebar-brand:hover,
@@ -20,6 +21,12 @@ body {
 
     .span-18 {
       background: lighten(@c-lighter, 20%);
+    }
+
+    form {
+        select, input, button {
+            color: rgb(43, 62, 80);
+        }
     }
   }
 }
